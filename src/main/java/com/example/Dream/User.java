@@ -3,49 +3,33 @@ package com.example.Dream;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "user")  // 테이블 이름 user로 매핑
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id;    // PK, AUTO_INCREMENT
 
-    // 로그인 아이디(중복X), ex) haechan
-    @Column(unique = true)
-    private String loginId;
+    @Column(name = "login_id", nullable = false, unique = true)
+    private String loginId;  // 아이디
 
-    // 비밀번호 (실제 서비스라면 암호화해야 하지만, 과제라서 그냥 저장해도 OK)
-    private String password;
+    @Column(nullable = false)
+    private String password; // 비밀번호
 
-    // 이름 or 닉네임
-    private String name;
+    @Column(nullable = false)
+    private String name;     // 이름
 
-    public User() {}
+    protected User() {}  // JPA 기본 생성자
 
-    public Long getId() {
-        return id;
-    }
+    // getter / setter
+    public Long getId() { return id; }
 
-    public String getLoginId() {
-        return loginId;
-    }
+    public String getLoginId() { return loginId; }
+    public void setLoginId(String loginId) { this.loginId = loginId; }
 
-    public void setLoginId(String loginId) {
-        this.loginId = loginId;
-    }
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 }

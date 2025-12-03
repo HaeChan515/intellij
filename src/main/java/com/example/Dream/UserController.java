@@ -1,6 +1,7 @@
 package com.example.Dream;
 
 import jakarta.servlet.http.HttpSession;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -9,20 +10,17 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserService userService;
-
     public static final String LOGIN_USER = "loginUser";
 
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
-    // 로그인 폼
     @GetMapping("/login")
     public String loginForm() {
         return "login";
     }
 
-    // 로그인 처리
     @PostMapping("/login")
     public String login(@RequestParam String loginId,
                         @RequestParam String password,
@@ -36,20 +34,15 @@ public class UserController {
             return "login";
         }
 
-        // 로그인 성공 → 세션에 저장
         session.setAttribute(LOGIN_USER, user);
-
-        // 로그인 후 꿈 목록 또는 메인으로 이동
         return "redirect:/dream/list";
     }
 
-    // 회원가입 폼
     @GetMapping("/register")
     public String registerForm() {
         return "register";
     }
 
-    // 회원가입 처리
     @PostMapping("/register")
     public String register(@RequestParam String loginId,
                            @RequestParam String password,
@@ -58,19 +51,21 @@ public class UserController {
 
         try {
             userService.register(loginId, password, name);
+            return "redirect:/login";
+
         } catch (IllegalArgumentException e) {
             model.addAttribute("error", e.getMessage());
             return "register";
-        }
 
-        // 가입 후 로그인 페이지로
-        return "redirect:/login";
+        } catch (DataIntegrityViolationException e) {
+            model.addAttribute("error", "이미 사용 중인 아이디입니다.");
+            return "register";
+        }
     }
 
-    // 로그아웃
     @GetMapping("/logout")
     public String logout(HttpSession session) {
-        session.invalidate(); // 세션 전체 삭제
+        session.invalidate();
         return "redirect:/login";
     }
 }
