@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>꿈 상세 보기</title>
+</head>
+<body>
+
+<h1>꿈 상세 보기</h1>
+
+<p><strong>ID:</strong> <span th:text="${dream.id}">1</span></p>
+<p><strong>작성 시간:</strong>
+    <span th:text="${#temporals.format(dream.createdAt, 'yyyy-MM-dd HH:mm')}">
+        2025-01-01 12:00
+    </span>
+</p>
+
+<h3>꿈 내용</h3>
+<p th:text="${dream.content}">꿈 내용</p>
+
+<h3>해몽</h3>
+<p th:text="${dream.resultText}">해몽 내용</p>
+
+<hr>
+
+<a th:href="@{/dream/list}">목록으로</a> |
+<a th:href="@{/dream/{id}/edit(id=${dream.id})}">수정</a>
+<form th:action="@{/dream/{id}/delete(id=${dream.id})}"
+      method="post"
+      style="display:inline">
+    <button type="submit"
+            onclick="return confirm('정말 삭제하시겠습니까?');">
+        삭제
+    </button>
+</form>
+
+</body>
+</html>

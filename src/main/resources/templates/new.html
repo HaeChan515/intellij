@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>꿈 해몽 입력</title>
+</head>
+<body>
+<h1>꿈 해몽 사이트</h1>
+<h2>꿈 내용 입력</h2>
+
+<form th:action="@{/dream/result}" method="post">
+    <textarea name="content" rows="10" cols="60"
+              placeholder="기억나는 꿈 내용을 적어주세요."></textarea>
+    <br><br>
+    <button type="submit">해몽 결과 보기</button>
+</form>
+
+<br>
+<a th:href="@{/dream/list}">내가 쓴 꿈 목록 보기</a>
+
+</body>
+</html>
+
+

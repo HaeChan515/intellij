@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>꿈 목록</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border-bottom: 1px solid #ddd;
+            padding: 8px 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f5f5f5;
+        }
+        tr:hover {
+            background-color: #fafafa;
+        }
+        .actions a,
+        .actions button {
+            margin-right: 6px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>꿈 목록</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>작성 시간</th>
+        <th>꿈 내용</th>
+        <th>해몽 요약</th>
+        <th>관리</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="dream : ${dreams}">
+        <td th:text="${dream.id}">1</td>
+        <td th:text="${#temporals.format(dream.createdAt, 'yyyy-MM-dd HH:mm')}">
+            2025-11-27 10:28
+        </td>
+        <td th:text="${#strings.abbreviate(dream.content, 30)}">
+            꿈 내용 요약
+        </td>
+        <td th:text="${#strings.abbreviate(dream.resultText, 40)}">
+            해몽 내용 요약
+        </td>
+        <td class="actions">
+            <a th:href="@{/dream/{id}(id=${dream.id})}">상세</a>
+            <a th:href="@{/dream/{id}/edit(id=${dream.id})}">수정</a>
+            <form th:action="@{/dream/{id}/delete(id=${dream.id})}"
+                  method="post"
+                  style="display:inline">
+                <button type="submit"
+                        onclick="return confirm('정말 삭제하시겠습니까?');">
+                    삭제
+                </button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+<a th:href="@{/dream/new}">새 꿈 기록하기</a>
+
+</body>
+</html>
