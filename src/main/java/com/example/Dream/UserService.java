@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
+<<<<<<< HEAD
     private final UserRepository userRepository;
 
     public UserService(UserRepository userRepository) {
@@ -30,3 +31,11 @@ public class UserService {
                 .orElse(null);
     }
 }
+=======
+    public UserService() {
+        // 일단 비워둬도 됨
+    }
+
+    // 나중에 회원가입 / 로그인 같은 기능 메서드 추가
+}
+>>>>>>> f96e2d56ffafd39cdde56c3ed2770536865e2144

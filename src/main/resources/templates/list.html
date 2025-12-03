@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+<<<<<<< HEAD
     <title>꿈 목록</title>
     <style>
         body {
@@ -36,19 +37,32 @@
 <h1>꿈 목록</h1>
 
 <table>
+=======
+    <title>꿈 해몽 목록</title>
+</head>
+<body>
+
+<h1>내가 쓴 꿈 목록</h1>
+
+<table border="1" cellpadding="8">
+>>>>>>> f96e2d56ffafd39cdde56c3ed2770536865e2144
     <thead>
     <tr>
         <th>ID</th>
         <th>작성 시간</th>
         <th>꿈 내용</th>
         <th>해몽 요약</th>
+<<<<<<< HEAD
         <th>관리</th>
+=======
+>>>>>>> f96e2d56ffafd39cdde56c3ed2770536865e2144
     </tr>
     </thead>
     <tbody>
     <tr th:each="dream : ${dreams}">
         <td th:text="${dream.id}">1</td>
         <td th:text="${#temporals.format(dream.createdAt, 'yyyy-MM-dd HH:mm')}">
+<<<<<<< HEAD
             2025-11-27 10:28
         </td>
         <td th:text="${#strings.abbreviate(dream.content, 30)}">
@@ -69,12 +83,22 @@
                 </button>
             </form>
         </td>
+=======
+            2025-01-01 12:00
+        </td>
+        <td th:text="${#strings.abbreviate(dream.content, 30)}">내용 요약</td>
+        <td th:text="${#strings.abbreviate(dream.resultText, 40)}">해몽 요약</td>
+>>>>>>> f96e2d56ffafd39cdde56c3ed2770536865e2144
     </tr>
     </tbody>
 </table>
 
 <br>
+<<<<<<< HEAD
 <a th:href="@{/dream/new}">새 꿈 기록하기</a>
+=======
+<a th:href="@{/dream/new}">새 꿈 해몽하기</a>
+>>>>>>> f96e2d56ffafd39cdde56c3ed2770536865e2144
 
 </body>
 </html>
