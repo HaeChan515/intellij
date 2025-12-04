@@ -5,15 +5,19 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
-<<<<<<< HEAD
     private final UserRepository userRepository;
 
+    // 생성자 주입
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
+    /**
+     * 회원가입
+     */
     public User register(String loginId, String password, String name) {
 
+        // 아이디 중복 체크
         if (userRepository.findByLoginId(loginId).isPresent()) {
             throw new IllegalArgumentException("이미 사용 중인 아이디입니다.");
         }
@@ -26,16 +30,12 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    /**
+     * 로그인
+     */
     public User login(String loginId, String password) {
-        return userRepository.findByLoginIdAndPassword(loginId, password)
+        return userRepository
+                .findByLoginIdAndPassword(loginId, password)
                 .orElse(null);
     }
 }
-=======
-    public UserService() {
-        // 일단 비워둬도 됨
-    }
-
-    // 나중에 회원가입 / 로그인 같은 기능 메서드 추가
-}
->>>>>>> f96e2d56ffafd39cdde56c3ed2770536865e2144
